@@ -2,9 +2,8 @@
 // Original code copyright Saleh Hamadeh: http://shamadeh.com/blog/web/nodejs/express/2014/07/20/ExpressMultipleSites.html
 // Original commit is Saleh's code entirely, released under undeclared license
 // Xenmen (Daniel Tadeuszow) assumes CC attribution is acceptable
-// All code after this initial commit is released under the AGPL3+
-// A copy of the license is included in the repo
-// http://opensource.org/licenses/AGPL-3.0
+// All code added since the initial commit is released under the AGPL3+
+// A copy of the license is included in the repo, and the original can be found @ http://opensource.org/licenses/AGPL-3.0
 
 // Module dependencies.
 var application_root = __dirname,
@@ -25,18 +24,20 @@ function createVirtualHost(domainName, dirPath) {
 }
 
 //Create server
-var app = express();
+var server = express();
 
 //Create the virtual hosts
-var potatoHost = createVirtualHost("www.potato.com", "potato");
-var tomatoHost = createVirtualHost("www.tomato.com", "tomato");
+var tadeuszowHost = createVirtualHost("www.tadeuszow.com", "Tadeuszow-site");
+var becoolHost = createVirtualHost("www.iwannabecool.ca", "iwannabecool-site");
 
 //Use the virtual hosts
-app.use(potatoHost);
-app.use(tomatoHost);
+server.use(tadeuszowHost);
+server.use(becoolHost);
 
 //Start server
 var port = 80;
-app.listen( port, function() {
-    console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
-});
+server.listen(
+	port, function() {
+		console.log( 'Express server listening on port %d in %s mode', port, server.settings.env );
+	}
+);
