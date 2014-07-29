@@ -11,7 +11,7 @@ var application_root = __dirname,
 	bodyParser = require( 'body-parser' );
 	var serveStatic = require('serve-static')
 	//methodOverride = require( 'method-override' );
-	//errorHandler = require( 'error-handler' );
+	errorhandler = require( 'errorhandler' );
 	vhost = require( 'vhost' );
 
 function createVirtualHost(domainName, dirPath) {
@@ -28,7 +28,7 @@ function createVirtualHost(domainName, dirPath) {
 	//var serve = serveStatic('public/ftp', {'index': ['index.html', 'index.htm']})
 	
 	//Show errors
-	//newhost.use( errorHandler({ dumpExceptions: true, showStack: true }));
+	newhost.use( errorhandler({ dumpExceptions: true, showStack: true }));
 	
 	return vhost(domainName, newhost)
 }
