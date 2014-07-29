@@ -1,4 +1,4 @@
-ServeBDT.com - 0.1.0
+ServeBDT.com - 1.0.0
 =========
 Bamboo Dump Truck
 A server is a big truck you can just dump things on. The internet is a series of tubes.

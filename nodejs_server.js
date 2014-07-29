@@ -37,8 +37,8 @@ function createVirtualHost(domainName, dirPath) {
 var server = express();
 
 //Create and use the virtual hosts
-server.use(createVirtualHost("www.tadeuszow.com", "Tadeuszow-site"));
-server.use(createVirtualHost("www.iwannabecool.ca", "iwannabecool-site"));
+server.use(createVirtualHost("*tadeuszow.com", "Tadeuszow-site"));
+server.use(createVirtualHost("*iwannabecool.ca", "iwannabecool-site"));
 
 //Start server
 var port = 80;
