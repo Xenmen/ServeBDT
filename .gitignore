@@ -1,3 +1,16 @@
+
+#####
+
+# This is the initial test for the server's config file
+options.conf
+
+# If you choose to git clone websites inside the cloned directory of ServeBDT, then this ensures you won't have git commit conflicts when you git pull :]
+*site*/
+
+#####
+
+
+
 # Logs
 logs
 *.log
