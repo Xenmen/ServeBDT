@@ -9,32 +9,36 @@
 var application_root = __dirname,
 	express = require( 'express' );
 	bodyParser = require( 'body-parser' );
-	vhost = require( 'express-vhost' );
+	var serveStatic = require('serve-static')
+	//methodOverride = require( 'method-override' );
+	//errorHandler = require( 'error-handler' );
+	vhost = require( 'vhost' );
 
 function createVirtualHost(domainName, dirPath) {
-    var vhost = express();
-    //parses request body and populates request.body
-    vhost.use( express.bodyParser() );
-    //checks request.body for HTTP method overrides
-    vhost.use( express.methodOverride() );
-    //Where to serve static content
-    vhost.use( express.static( dirPath ) );
-    //Show errors
-    vhost.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
-
-    return express.vhost(domainName, vhost)
+	var newhost = express();
+	
+	//parses request body and populates request.body
+	newhost.use( bodyParser.urlencoded({ extended: true }) );
+	
+	//checks request.body for HTTP method overrides
+	//newhost.use( methodOverride() );
+	
+	//Where to serve static content
+	newhost.use( serveStatic( dirPath ) );
+	//var serve = serveStatic('public/ftp', {'index': ['index.html', 'index.htm']})
+	
+	//Show errors
+	//newhost.use( errorHandler({ dumpExceptions: true, showStack: true }));
+	
+	return vhost(domainName, newhost)
 }
 
 //Create server
 var server = express();
 
-//Create the virtual hosts
-var tadeuszowHost = createVirtualHost("www.tadeuszow.com", "Tadeuszow-site");
-var becoolHost = createVirtualHost("www.iwannabecool.ca", "iwannabecool-site");
-
-//Use the virtual hosts
-server.use(tadeuszowHost);
-server.use(becoolHost);
+//Create and use the virtual hosts
+server.use(createVirtualHost("www.tadeuszow.com", "Tadeuszow-site"));
+server.use(createVirtualHost("www.iwannabecool.ca", "iwannabecool-site"));
 
 //Start server
 var port = 80;
