@@ -7,7 +7,9 @@
 
 // Module dependencies.
 var application_root = __dirname,
-    express = require( 'express' );
+	express = require( 'express' );
+	bodyParser = require( 'body-parser' );
+	vhost = require( 'express-vhost' );
 
 function createVirtualHost(domainName, dirPath) {
     var vhost = express();
@@ -41,3 +43,44 @@ server.listen(
 		console.log( 'Express server listening on port %d in %s mode', port, server.settings.env );
 	}
 );
+
+/*
+/////
+var express = require('express');
+var vhost = require('vhost');
+
+var app = express();
+
+app.use(vhost('mail.example.com', function(req, res){}));
+app.use(vhost('*.example.com', express()));
+app.use(express());
+express.listen();
+
+/////
+var connect = require('connect')
+var serveStatic = require('serve-static')
+var vhost = require('vhost')
+
+// create main app
+var app = connect()
+
+var mailapp = connect()
+
+// add middlewares to mailapp for mail.example.com
+
+// create app to serve static files on subdomain
+var staticapp = connect()
+staticapp.use(serveStatic('public'))
+
+// add vhost routing to main app for mail
+app.use(vhost('mail.example.com', mailapp))
+
+// route static assets for "assets-*" subdomain to get
+// around max host connections limit on browsers
+app.use(vhost('assets-*.example.com', staticapp))
+
+// add middlewares and main usage to app
+
+app.listen(3000)
+
+*/

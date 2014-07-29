@@ -1,6 +1,9 @@
 
 #####
 
+# Dependencies
+node_modules
+
 # This is the initial test for the server's config file
 options.conf
 
