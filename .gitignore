@@ -4,10 +4,17 @@
 # Dependencies
 node_modules
 
+# Ignore script test files: enables committing without deleting test script
+test.js
+
 # This is the initial test for the server's config file
 options.conf
 
-# If you choose to git clone websites inside the cloned directory of ServeBDT, then this ensures you won't have git commit conflicts when you git pull :]
+# This is the folder for site-mapper configuration
+config/
+
+# ServeBDT expects websites to be stored in folders containing 'site' in the name
+# This ignore lets you git pull without asking you to git commit your sites to the ServeBDT project
 *site*/
 
 #####

@@ -2,8 +2,8 @@ ServeBDT.com - 1.0.0
 =========
 Bamboo Dump Truck
 A server is a big truck you can just dump things on. The internet is a series of tubes.
-A webserver experiment built on nodejs and expressjs :]
-You'll need an up-to-date version of Nodejs, a build at least as recent as 2014 06 xx.
+
+A webserver experiment built on nodejs and expressjs :] You'll need an up-to-date version of Nodejs, a build at least as recent as 2014 06 xx.
 A Batch script is included to start the server under Windows, but this tool will be optimized for Linux and not Windows Server.
 
 Currently consists of example expressjs code, from here: http://shamadeh.com/blog/web/nodejs/express/2014/07/20/ExpressMultipleSites.html
@@ -11,14 +11,25 @@ The original code does not have a declared license. To all added code the AGPL3+
 
 Use
 ===
-Presently, you must modify the nodejs_server.js script itself, so git-pull won't be pleasant. This will be altered to be loaded from a conf file as I have time. My first priority is to get this code up and running for my personal site. Then, the conf file will be implemented, and then a script to register it as a service, and then the Cron job, as mentioned below in planned features.
+Place the website directory inside this project, and add the domain/folder-name pair to the server script (by modifying it directly)[1].
+
+Then just run BDT_start and your server is online!
 
 
-Notes:
+[1]This is temporary, as it makes updating ServeBDT painful. This will be altered, so that domain/folder pairs will be loaded from a conf file.
+
+
+Important Usage Notes:
 * The bash script is designed to spawn node to run in the background, if you want to stop it you'll need to run kill it yourself ("kill node" in the terminal).
 
-Future Features:
-* Install script to add the server to the services list and make it a Cron job to check that it is running, based on a shell variable (ie, if you don't want the server to be running, or for the Cron job to start it up again, eg during extended maintenance).
+Existing Features:
+* Hosts multiple domains and subdomains via vhost
+* Generates Sitemap.xml for each site via a python2 script (requires beautiful soup 4, get with pip install bs4 )
+
+Planned Features:
+* Auto-detect subdirectories containing "*site*" in the name, and host them
+* Cron script to make the server a Cron job; to check that it is running, based on a shell variable (ie, if you don't want the server to be running, or for the Cron job to start it up again, eg during extended maintenance).
+* Add script for modifying the hosts file setting localhost as the address for the hosted domains
 
 
 =========

@@ -7,12 +7,27 @@
 
 // Module dependencies.
 var application_root = __dirname,
+	
+	//
 	express = require( 'express' );
-	bodyParser = require( 'body-parser' );
+	
+	//
+	var bodyParser = require( 'body-parser' );
+	
+	//Better static-site serving
 	var serveStatic = require('serve-static')
-	//methodOverride = require( 'method-override' );
-	errorhandler = require( 'errorhandler' );
-	vhost = require( 'vhost' );
+	
+	//
+	var spawn = require("child_process").spawn;
+	
+	//
+	//var methodOverride = require( 'method-override' );
+	
+	//
+	var errorhandler = require( 'errorhandler' );
+	
+	//Enables multi-site hosting
+	var vhost = require( 'vhost' );
 
 function createVirtualHost(domainName, dirPath) {
 	var newhost = express();
@@ -24,11 +39,23 @@ function createVirtualHost(domainName, dirPath) {
 	//newhost.use( methodOverride() );
 	
 	//Where to serve static content
-	newhost.use( serveStatic( dirPath ) );
+	/*
+	newhost.use(
+		express.static(__dirname + dirPath)
+	);
+	*/
+	//TODO expose serveStatic's options
+	newhost.use( serveStatic( dirPath, {"extensions": ['html', 'png', 'jpg', 'txt']}) );
+	
 	//var serve = serveStatic('public/ftp', {'index': ['index.html', 'index.htm']})
 	
 	//Show errors
 	newhost.use( errorhandler({ dumpExceptions: true, showStack: true }));
+	
+	//Generate sitemap
+	//Requires the python2 library 'Beautiful Soup 4'
+	//
+	var process = spawn('python',["bdt_sitemap.py", domainName, dirPath]);
 	
 	return vhost(domainName, newhost)
 }
@@ -37,8 +64,21 @@ function createVirtualHost(domainName, dirPath) {
 var server = express();
 
 //Create and use the virtual hosts
-server.use(createVirtualHost("tadeuszow.com", "Tadeuszow-site"));
-server.use(createVirtualHost("iwannabecool.ca", "iwannabecool-site"));
+//TODO: Parse from a json file
+var sites= [
+  ["tadeuszow.com", "Tadeuszow-site/main"],
+  ["daniel.tadeuszow.com", "Tadeuszow-site/daniel"],
+  ["anita.tadeuszow.com", "Tadeuszow-site/anita"],
+  ["edward.tadeuszow.com", "Tadeuszow-site/edward"],
+  
+  ["iwannabecool.ca", "iwannabecool-site"]
+];
+
+for (var i=0;i<sites.length;i++) {
+	console.log( 'Domain: %s ', sites[i][0] );
+	console.log( '\tLoaded from: %s\n', sites[i][1] );
+	server.use(createVirtualHost(sites[i][0], sites[i][1]));
+}
 
 //Start server
 var port = 80;

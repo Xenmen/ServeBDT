@@ -1,0 +1,29 @@
+{
+  "author": {
+    "name": "Daniel Tadeuszow",
+    "email": "dtadeuszow@gmail.com"
+  },
+  "name": "bamboo-dump-truck",
+  "description": "Multidomain webserver and sitemap generator.",
+  "version": "0.1.1",
+  "homepage": "http://tadeuszow.com/daniel/projects/thissite.html",
+  "main": "bdt_server.js",
+  "keywords": [
+    "webserver", "sitemap"
+  ],
+  "repository" : {
+    "type": "git",
+    "url": "git://github.com/Xenmen/ServeBDT.git"
+  },
+  "dependencies": {
+    "express": ">= 4.0.0",
+    "express-sitemap": ">= 1.3.1"
+    "vhost": "*"
+    "body-parser": "*"
+    "serve-static": "*"
+    "errorhandler": "*"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
