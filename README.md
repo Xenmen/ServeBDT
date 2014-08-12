@@ -6,7 +6,7 @@ A server is a big truck you can just dump things on. The internet is a series of
 A webserver experiment built on nodejs and expressjs :] You'll need an up-to-date version of Nodejs, a build at least as recent as 2014 06 xx.
 A Batch script is included to start the server under Windows, but this tool will be optimized for Linux and not Windows Server.
 
-Currently consists of example expressjs code, from here: http://shamadeh.com/blog/web/nodejs/express/2014/07/20/ExpressMultipleSites.html
+Originally based on code by Saleh Hamadeh: http://shamadeh.com/blog/web/nodejs/express/2014/07/20/ExpressMultipleSites.html
 The original code does not have a declared license. To all added code the AGPL3+ applies: http://opensource.org/licenses/AGPL-3.0
 
 Use
