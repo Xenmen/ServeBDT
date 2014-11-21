@@ -6,7 +6,7 @@
 // A copy of the license is included in the repo, and the original can be found @ http://opensource.org/licenses/AGPL-3.0
 
 // Module dependencies.
-var application_root = __dirname,
+var application_root = __dirname;
 	
 	//
 	express = require( 'express' );
@@ -15,7 +15,7 @@ var application_root = __dirname,
 	var bodyParser = require( 'body-parser' );
 	
 	//Better static-site serving
-	var serveStatic = require('serve-static')
+	var serveStatic = require('serve-static');
 	
 	//
 	var spawn = require("child_process").spawn;
@@ -55,7 +55,7 @@ function createVirtualHost(domainName, dirPath) {
 	//Generate sitemap
 	//Requires the python2 library 'Beautiful Soup 4'
 	//
-	var process = spawn('python',["bdt_sitemap.py", domainName, dirPath]);
+	//var process = spawn('python',["bdt_sitemap.py", domainName + " " + dirPath]);
 	
 	return vhost(domainName, newhost)
 }
@@ -66,12 +66,12 @@ var server = express();
 //Create and use the virtual hosts
 //TODO: Parse from a json file
 var sites= [
-  ["tadeuszow.com", "Tadeuszow-site/main"],
-  ["daniel.tadeuszow.com", "Tadeuszow-site/daniel"],
-  ["anita.tadeuszow.com", "Tadeuszow-site/anita"],
-  ["edward.tadeuszow.com", "Tadeuszow-site/edward"],
-  
-  ["iwannabecool.ca", "iwannabecool-site"]
+	["tadeuszow.com", "Tadeuszow-site/main"],
+	["daniel.tadeuszow.com", "Tadeuszow-site/daniel"],
+	["anita.tadeuszow.com", "Tadeuszow-site/anita"],
+	["edward.tadeuszow.com", "Tadeuszow-site/edward"]
+
+	//["iwannabecool.ca", "defunct"]
 ];
 
 for (var i=0;i<sites.length;i++) {
@@ -79,6 +79,10 @@ for (var i=0;i<sites.length;i++) {
 	console.log( '\tLoaded from: %s\n', sites[i][1] );
 	server.use(createVirtualHost(sites[i][0], sites[i][1]));
 }
+
+//test server creation
+//server.use(vhost("chat.tadeuszow.com", chat));
+//server.use(vhost("mbooru.tadeuszow.com", newhost));
 
 //Start server
 var port = 80;
