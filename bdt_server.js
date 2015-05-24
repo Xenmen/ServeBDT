@@ -45,7 +45,7 @@ function createVirtualHost(domainName, dirPath) {
 	);
 	*/
 	//TODO expose serveStatic's options
-	newhost.use( serveStatic( dirPath, {"extensions": ['html', 'png', 'jpg', 'txt']}) );
+	newhost.use( serveStatic( dirPath, {"extensions": ['html', 'png', 'jpg', 'txt', 'json']}) );
 	
 	//var serve = serveStatic('public/ftp', {'index': ['index.html', 'index.htm']})
 	
@@ -69,7 +69,8 @@ var sites= [
 	["tadeuszow.com", "Tadeuszow-site/main"],
 	["daniel.tadeuszow.com", "Tadeuszow-site/daniel"],
 	["anita.tadeuszow.com", "Tadeuszow-site/anita"],
-	["edward.tadeuszow.com", "Tadeuszow-site/edward"]
+	["edward.tadeuszow.com", "Tadeuszow-site/edward"],
+	["8chan.tadeuszow.com", "livedemo/8chan"]
 
 	//["iwannabecool.ca", "defunct"]
 ];
