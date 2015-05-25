@@ -70,7 +70,7 @@ var sites= [
 	["daniel.tadeuszow.com", "Tadeuszow-site/daniel"],
 	["anita.tadeuszow.com", "Tadeuszow-site/anita"],
 	["edward.tadeuszow.com", "Tadeuszow-site/edward"],
-	["8chan.tadeuszow.com", "livedemo/8chan"]
+	["chang.tadeuszow.com", "livedemo/8chan"]
 
 	//["iwannabecool.ca", "defunct"]
 ];
